@@ -12,7 +12,7 @@ module.exports = function(grunt) {
 		},
 		release: {
 			dest: 'release',
-			jsTasks: ['jshint', 'requirejs'],
+			jsTasks: ['jshint', 'requirejs', 'copy:jsIE'],
 			sassOutputStyle: 'compressed'
 		}
 	};
@@ -42,6 +42,7 @@ module.exports = function(grunt) {
 	 */
 	var componentsList = [];
 	// Loop over files to create componentList
+
 	for(i=0;i<jsFiles.length;i++){
 		var fileName;
 		// Depending on environment (dev or release) the dependency paths will be different
@@ -107,10 +108,52 @@ module.exports = function(grunt) {
 	gruntConfig.requirejs = {
 		compile: {
 			options: {
+				baseUrl: 'src/global-js',
 				findNestedDependencies: 'true',
 				include: explicitDependencies,
 				mainConfigFile: "src/global-js/main.js",
-				out: env.dest+'/js/<%= pkg.name %>.min.js'
+				out: env.dest+'/js/<%= pkg.name %>.min.js',
+				paths: {
+					'base':				'vendor/Base',
+					'jquery':			'vendor/jquery',
+					'text':				'vendor/require-text',
+					'elementquery':		'vendor/elementQuery',
+					'html5shiv':		'ie/html5shiv',
+					'html2canvas':		'vendor/html2canvas',
+					'StackBlur':		'vendor/StackBlur',
+					'iscroll':			'vendor/iscroll',
+					'hammer':			'vendor/hammer',
+					'jquery-hammer':	'vendor/jquery.hammer-full',
+					'work':				'vendor/grid',
+					'Modernizr':		'vendor/modernizr.custom'
+				},
+				shim: {
+					'jquery': {
+						'exports': '$'
+					},
+					'elementquery': {
+						'deps': ['jquery'],
+						'exports': 'elementQuery'
+					},
+					'html5shiv':{
+						'exports' : 'h5s'
+					},
+					'html2canvas':{
+						'exports' : 'html2canvas'
+					},
+					'StackBlur': {
+						'exports' : 'StackBlur'
+					},
+					'iscroll': {
+						'exports' : 'iscroll'
+					},
+					'work': {
+						'exports' : 'work'
+					},
+					'Modernizr': {
+						'exports' : 'Modernizr'
+					}
+				}
 			}
 		}
 	};
@@ -190,6 +233,19 @@ module.exports = function(grunt) {
 		}
 	};
 
+
+	// auto create manifest file
+	gruntConfig.appcache = {
+		options: {
+			basePath: 'release'
+		},
+		all: {
+			dest: 'release/manifest.appcache',
+			cache: 'release/**/*',
+			network: '*'
+		}
+	};
+
 	// Replace REM with px
 	gruntConfig.remfallback= {
 		options: {
@@ -223,6 +279,11 @@ module.exports = function(grunt) {
 				{expand: true, flatten: true, cwd: 'src/templates', src: ['**/*.js'], dest: env.dest+'/js'},
 				{expand: true, flatten: true, cwd: 'src/pages', src: ['**/*.js'], dest: env.dest+'/js'},
 				{expand: true, flatten: false, cwd: 'src/global-js', src: ['**/*.js'], dest: env.dest+'/js'}
+			]
+		},
+		jsIE: {
+			files: [
+				{expand: true, flatten: false, cwd: 'src/global-js', src: ['ie/**/*.js'], dest: env.dest+'/js'}
 			]
 		}
 	};
@@ -301,10 +362,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-requirejs');
 	grunt.loadNpmTasks('grunt-remfallback');
 	grunt.loadNpmTasks('grunt-contrib-connect');
+	grunt.loadNpmTasks('grunt-appcache');
 
 	// Set up task aliases
 	grunt.registerTask('js', env.jsTasks); // Get JS tasks from environment (e.g. only run concat or uglify in release)
-	grunt.registerTask('default', ['jshint', 'jade', 'js', 'copy:img', 'copy:video', 'compass', 'remfallback']);
+	grunt.registerTask('default', ['jshint', 'jade', 'js', 'copy:img', 'copy:video', 'compass', 'remfallback', 'appcache']);
 	
 	grunt.registerTask('sass', ['compass', 'remfallback']);
 

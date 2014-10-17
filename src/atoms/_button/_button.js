@@ -6,7 +6,7 @@
 define([
 	'jquery',
 	'componentTasks',
-	'checkout'
+	'vendor/checkout'
 ], function ($, componentTasks) {
 
 	/**
@@ -76,7 +76,6 @@ define([
 			billingAddress: true,
 			shippingAddress: true,
 			amount: amount});
-			//e.preventDefault();
 
 		});
 
