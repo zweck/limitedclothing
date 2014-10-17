@@ -1,0 +1,13 @@
+//-
+	@file Defines a button mixin
+	@author Phil Hauser phil.hsr@gmail.com
+
+//- Dependencies
+
+//- Definition
+mixin button(label, style)
+
+	if(label == "BUY")
+		button(class="#{style} buy-button") #{label}
+	else
+		button(class="#{style}") #{label}

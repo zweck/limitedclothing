@@ -1,0 +1,41 @@
+/**
+ * @file Defines styles for the item_card page
+ * @author Phil Hauser phil.hsr@gmail.com
+ */
+
+$small: 500px;
+$medium: 900px;
+
+.card{
+	margin: 1rem 0;
+	background: white;
+	display: inline-block;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	posiition: relative;
+	cursor: pointer;
+	overflow: hidden;
+
+	&:hover{
+		-webkit-box-shadow: 3px 3px 18px 0px rgba(50, 50, 50, 0.57);
+		-moz-box-shadow:	3px 3px 18px 0px rgba(50, 50, 50, 0.57);
+		box-shadow:			3px 3px 18px 0px rgba(50, 50, 50, 0.57);
+		z-index: 1;
+		position: relative;
+	}
+	&:active{
+		-webkit-box-shadow: 3px 3px 18px 0px rgba(50, 50, 50, 0);
+		-moz-box-shadow:	3px 3px 18px 0px rgba(50, 50, 50, 0);
+		box-shadow:			3px 3px 18px 0px rgba(50, 50, 50, 0);
+	}
+	h4,p{
+		margin: 0;
+		padding: 0.5rem 2rem;
+	}
+
+	p[data-price]:before{
+		content: '£';
+	}
+
+}

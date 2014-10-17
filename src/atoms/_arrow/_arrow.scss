@@ -1,0 +1,15 @@
+/**
+ * @file Defines styles for the arrow page
+ * @author Phil Hauser phil.hsr@gmail.com
+ */
+
+.arrow{
+	width: 60px;
+	height: 60px;
+	background: url(../img/arrow.svg) no-repeat top left;
+	background-size: contain;
+
+	&.white{
+		background: url(../img/arrow-white.svg) no-repeat top left;
+	}
+}

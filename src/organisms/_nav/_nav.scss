@@ -1,0 +1,55 @@
+/**
+ * @file Defines styles for the nav page
+ * @author Phil Hauser phil.hsr@gmail.com
+ */
+
+
+nav{
+
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: block;
+	width: 100%;
+	z-index: 5;
+	background: #1b2735;
+	height: 3rem;
+	opacity: 0;
+	-webkit-transition: opacity 0.5s;
+
+	&.scrolled{
+		opacity: 0.95;
+	}
+
+
+	.logo{
+		line-height: 3rem;
+		p{
+			display: none;
+			&:first-child{
+				display: inline-block;
+				font-size: 1.5rem;
+				letter-spacing: 3px !important;
+			}
+		}
+	}
+
+	@include at-min-width(320px){
+		height: 5rem;
+
+		.logo{
+			line-height: 5rem;
+			text-align: left;
+			padding-left: 3rem;
+			p{
+				&:first-child{
+					font-size: 1rem;
+				}
+			}
+		}
+	}
+
+	//display: none;
+
+}

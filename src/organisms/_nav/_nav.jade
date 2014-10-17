@@ -1,0 +1,16 @@
+//-
+	@file Defines a nav mixin
+	@author Phil Hauser phil.hsr@gmail.com
+
+//- Dependencies
+include ../../atoms/_logo/_logo
+
+//- Definition
+mixin nav(settings)
+
+	if settings.visible
+		nav.scrolled
+			+logo()
+	else
+		nav
+			+logo()

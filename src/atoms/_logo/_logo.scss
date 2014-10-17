@@ -1,0 +1,36 @@
+/**
+ * @file Defines styles for the logo page
+ * @author Phil Hauser phil.hsr@gmail.com
+ */
+
+.logo{
+	color: white;
+	text-align: center;
+
+	p{
+		margin: 0;
+		padding: 0;
+		font-size: 2rem;
+		font-weight: 300;
+		letter-spacing: 10px;
+		transition: scale 0.5s;
+	}
+	p:first-child{
+		font-family: $serif-font-family;
+		font-size: 3.5rem;
+		letter-spacing: 7px;
+	}
+
+
+
+	@include at-min-width(320px){
+		p{
+			font-size: 2rem;
+			letter-spacing: 10px;
+		}
+		p:first-child{
+			font-size: 4rem;
+			letter-spacing: 10px;
+		}
+	}
+}
