@@ -1,12 +1,10 @@
-# ace files
-ace_config.json
-
-# SASS Cache
 .sass-cache
-
-# Node modules
+ace_config.json
+ace.sublime-project
+ace.sublime-workspace
+export
+Gruntfile.js
 node_modules
-
-# Build output folders
-dev
-release
+package.json
+README.md
+src
